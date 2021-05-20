@@ -1,6 +1,6 @@
 ui_print(" ");
 ui_print("                                       ");
-ui_print("   Kakarot                                    ");
+ui_print("   Carrot                                    ");
 ui_print("            kernel                            ");
 ui_print("                   For                      ");
 ui_print("                       M30s                ");
@@ -8,7 +8,7 @@ ui_print("                                       ");
 ui_print(" Device           : universal9610/11");
 ui_print(" Manufacturer     : samsung");
 ui_print(" Version          : N1");
-ui_print(" Developer        : Neel0210");
+ui_print(" Developer        : ALNoman"); #Neel0210 who?");
 ui_print(" ");
 ifelse(is_mounted("/system_root"), unmount("/system_root"));
 ifelse(is_mounted("/vendor"), unmount("/vendor"));
@@ -19,36 +19,36 @@ ui_print("Getting Device Info...");
 ui_print(" ");
 if is_substring("A505", getprop("ro.boot.bootloader")) then
     ui_print("Target: A50 detected, extracting files...");
-    package_extract_file("PRISH/D/A50/boot.img", "/dev/block/platform/13520000.ufs/by-name/boot");
+    package_extract_file("PERISH/D/A50/boot.img", "/dev/block/platform/13520000.ufs/by-name/boot");
 endif;
 if is_substring("A507", getprop("ro.boot.bootloader")) then
     ui_print("Target: A50s detected, extracting files...");
-    package_extract_file("PRISH/D/A50S/boot.img", "/dev/block/platform/13520000.ufs/by-name/boot");
+    package_extract_file("PERISH/D/A50S/boot.img", "/dev/block/platform/13520000.ufs/by-name/boot");
 endif;
 if is_substring("A515", getprop("ro.boot.bootloader")) then
     ui_print("Target: A51 detected, extracting files...");
-    package_extract_file("PRISH/D/A51/boot.img", "/dev/block/platform/13520000.ufs/by-name/boot");
+    package_extract_file("PERISH/D/A51/boot.img", "/dev/block/platform/13520000.ufs/by-name/boot");
 endif;
 if is_substring("M215", getprop("ro.boot.bootloader")) then
     ui_print("Target: M21 detected, extracting files...");
-    package_extract_file("PRISH/D/M21/boot.img", "/dev/block/platform/13520000.ufs/by-name/boot");
+    package_extract_file("PERISH/D/M21/boot.img", "/dev/block/platform/13520000.ufs/by-name/boot");
 endif;
 if is_substring("M307", getprop("ro.boot.bootloader")) then
     ui_print("Target: M30s detected, extracting files...");
-    package_extract_file("PRISH/D/M30S/boot.img", "/dev/block/platform/13520000.ufs/by-name/boot");
+    package_extract_file("PERISH/D/M30S/boot.img", "/dev/block/platform/13520000.ufs/by-name/boot");
 endif;
 if is_substring("M315", getprop("ro.boot.bootloader")) then
     ui_print("Target: M31 detected, extracting files...");
-    package_extract_file("PRISH/D/M31/boot.img", "/dev/block/platform/13520000.ufs/by-name/boot");
+    package_extract_file("PERISH/D/M31/boot.img", "/dev/block/platform/13520000.ufs/by-name/boot");
 endif;
 if is_substring("F415", getprop("ro.boot.bootloader")) then
     ui_print("Target: F41 detected, extracting files...");
-    package_extract_file("PRISH/D/F41/boot.img", "/dev/block/platform/13520000.ufs/by-name/boot");
+    package_extract_file("PERISH/D/F41/boot.img", "/dev/block/platform/13520000.ufs/by-name/boot");
 endif;
-package_extract_dir("PRISH/system_root", "/system_root");
-package_extract_dir("PRISH/vendor", "/vendor");
+package_extract_dir("PERISH/system_root", "/system_root");
+package_extract_dir("PERISH/vendor", "/vendor");
 ui_print("-- Trimming partitions");
-package_extract_file("PRISH/fstrim", "/tmp/fstrim");
+package_extract_file("PERISH/fstrim", "/tmp/fstrim");
 set_metadata("/tmp/fstrim", "uid", 0, "gid", 0, "mode", 0755);
 run_program("/sbin/busybox", "fstrim", "-v", "/system_root");
 run_program("/sbin/busybox", "fstrim", "-v", "/vendor");
