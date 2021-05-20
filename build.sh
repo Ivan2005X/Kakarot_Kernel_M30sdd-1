@@ -1,10 +1,10 @@
 #
 #!/bin/bash
-IMAGE=out/arch/arm64/boot/Image;
-AIKDIR=~/m30s/PRISH/AIK;
+CURDIR=~/m30s;
+IMAGE=${CURDIR}/out/arch/arm64/boot/Image;
+AIKDIR=${CURDIR}/PRISH/AIK;
 BOTIMG=${AIKDIR}/split_img/boot.img-zImage;
 NEWIMG=${AIKDIR}/image-new.img
-CURDIR=~/m30s;
 echo "Setting Up Environment"
 echo ""
 export ARCH=arm64
@@ -23,6 +23,7 @@ export CCACHE=ccache
 export CROSS_COMPILE=~/toolchain/bin/aarch64-linux-gnu-
 export CLANG_TRIPLE=~/clang/bin/aarch64-linux-gnu-
 export CC=~/clang/bin/clang
+export CONFIG_LOCALVERSION="Gang Gang for M30s by DAvinash97"
 
 if [ ! -f "usr/magisk/update_magisk.sh" ]; then
    . ./usr/magisk/update_magisk.sh
