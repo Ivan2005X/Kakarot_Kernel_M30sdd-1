@@ -1,10 +1,10 @@
 
-gcc/
-clang/
+gcc
+clang
 *.fw
 *.zip
-out/
-output/
+out
+output
 test.sh
 *.log
 PRISH/AIK/ramdisk-new.cpio.empty

@@ -9,51 +9,46 @@ export ANDROID_MAJOR_VERSION=r
 export PLATFORM_VERSION=11.0.0
 
 # Export KBUILD flags
-export KBUILD_BUILD_USER=neel0210
-export KBUILD_BUILD_HOST=hell
+export KBUILD_BUILD_USER=davinash97 #neel0210 who?
+export KBUILD_BUILD_HOST=ExynosLab #hell
 
 # CCACHE
-export CCACHE="$(which ccache)"
-export USE_CCACHE=1
-ccache -M 50G
-export CCACHE_COMPRESS=1
+export CCACHE=ccache
+#export USE_CCACHE=1
+#ccache -M 50G
+#export CCACHE_COMPRESS=1
 
 # TC LOCAL PATH
-export CROSS_COMPILE=$(pwd)/gcc/bin/aarch64-linux-android-
-export CLANG_TRIPLE=$(pwd)/clang/bin/aarch64-linux-gnu-
-export CC=$(pwd)/clang/bin/clang
+export CROSS_COMPILE=~/toolchain/bin/aarch64-linux-gnu-
+export CLANG_TRIPLE=~/clang/bin/aarch64-linux-gnu-
+export CC=~/clang/bin/clang
 
-# Check if have gcc/32 & clang folder
-if [ ! -d gcc ]; then
-   git clone --depth 1 git://github.com/LineageOS/android_prebuilts_gcc_linux-x86_aarch64_aarch64-linux-android-4.9 gcc
-fi
-
-if [ ! -d clang ]; then
-   git clone --depth 1 https://github.com/kdrag0n/proton-clang.git clang
-fi
+curl -F "text=Compiling for M30S" "https://api.telegram.org/bot${BOT_ID}/sendMessage?chat_id=${CHAT_ID}&parse_mode=HTML"
 
 echo "======================="
 echo "Making kernel with ZIP"
 echo "======================="
-make clean && make mrproper
-rm -rf out
-rm ./arch/arm64/boot/Image
-rm ./arch/arm64/boot/Image.gz
-rm ./Image
-rm ./output/*.zip
-rm ./PRISH/AIK/image-new.img
-rm ./PRISH/AIK/ramdisk-new.cpio.empty
-rm ./PRISH/AIK/split_img/boot.img-zImage
-rm ./PRISH/AK/Image
-rm ./PRISH/ZIP/PRISH/D/M30S/boot.img
-rm ./PRISH/AK/*.zip
+#make clean && make mrproper
+#rm -rf out
+#rm ./arch/arm64/boot/Image
+#rm ./arch/arm64/boot/Image.gz
+#rm ./Image
+#rm ./output/*.zip
+#rm ./PRISH/AIK/image-new.img
+#rm ./PRISH/AIK/ramdisk-new.cpio.empty
+#rm ./PRISH/AIK/split_img/boot.img-zImage
+#rm ./PRISH/AK/Image
+#rm ./PRISH/ZIP/PRISH/D/M30S/boot.img
+#rm ./PRISH/AK/*.zip
 clear
 echo "======================="
 echo "Making kernel with ZIP"
 echo "======================="
-. usr/magisk/update_magisk.sh
-make m30s_defconfig O=out CC=clang
-make -j16 O=out CC=clang
+if [ ! -f "usr/magisk/update_magisk.sh" ]; then
+   . ./usr/magisk/update_magisk.sh
+fi
+make m30s_defconfig O=output
+make -j$(($(nproc) + 1)) O=out
 echo "Kernel Compiled"
 echo ""
 echo "======================="
