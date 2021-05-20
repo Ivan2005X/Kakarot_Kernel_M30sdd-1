@@ -59,5 +59,6 @@ if [ -f $IMAGE ]; then
         echo "Image-new.img missing"
     fi
 else
+    curl --url "https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}" -F "text=Looks Like an error. Need to check the build log"
     echo "Error Occured"
 fi
