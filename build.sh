@@ -1,10 +1,20 @@
 #
 #!/bin/bash
+clear
 CURDIR=~/m30s;
 IMAGE=${CURDIR}/out/arch/arm64/boot/Image;
 AIKDIR=${CURDIR}/PRISH/AIK;
 BOTIMG=${AIKDIR}/split_img/boot.img-zImage;
 NEWIMG=${AIKDIR}/image-new.img
+if [ -f $IMAGE ]; then
+    rm $IMAGE;
+fi
+if [ -f $BOTIMG ]; then
+    rm $BOTIMG;
+fi
+if [ -f $NEWIMG ]; then
+    rm $NEWIMG;
+fi
 echo "Setting Up Environment"
 echo ""
 export ARCH=arm64
@@ -25,9 +35,6 @@ export CLANG_TRIPLE=~/clang/bin/aarch64-linux-gnu-
 export CC=~/clang/bin/clang
 export CONFIG_LOCALVERSION="Gang Gang for M30s by DAvinash97"
 
-if [ ! -f "usr/magisk/update_magisk.sh" ]; then
-   . ./usr/magisk/update_magisk.sh
-fi
 make m30s_defconfig O=output
 make -j$(($(nproc) + 1)) O=out
 if [ -f $IMAGE ]; then
