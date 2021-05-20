@@ -28,13 +28,12 @@ export KBUILD_BUILD_HOST=ExynosLab #hell
 
 # CCACHE
 export CCACHE=ccache
-
 # TC LOCAL PATH
 export CROSS_COMPILE=~/toolchain/bin/aarch64-linux-gnu-
 export CLANG_TRIPLE=~/clang/bin/aarch64-linux-gnu-
 export CC=~/clang/bin/clang
 export CONFIG_LOCALVERSION="Gang Gang for M30s by DAvinash97"
-
+curl --url "https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}" -F "text=Started Compiling kernel for M30s"
 make m30s_defconfig O=output
 make -j$(($(nproc) + 1)) O=out
 if [ -f $IMAGE ]; then
@@ -51,6 +50,10 @@ if [ -f $IMAGE ]; then
         zip -r9 Carrot-Kernel_M30sdd-$(date +"%Y-%m-%d").zip *
         cp *.zip ${CURDIR}/
         cd $CURDIR;
+        for i in "*.zip"
+        do
+            curl --url "https://api.telegram.org/bot${BOT_TOKEN}/sendDocument?chat_id=${CHAT_ID}" -F "document=@Carrot-Kernel_M30sdd-2021-05-20.zip"
+        done
     else
         cd $CURDIR;
         echo "Image-new.img missing"
