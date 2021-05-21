@@ -15,6 +15,12 @@ fi
 if [ -f $NEWIMG ]; then
     rm $NEWIMG;
 fi
+if [ -f Carrot*.zip ]; then
+    rm -f Carrot*.zip;
+fi
+if [ -f ${CURDIR}/PRISH/ZIP/boot.img ]; then
+    rm -f ${CURDIR}/PRISH/ZIP/boot.img
+fi
 echo "Setting Up Environment"
 echo ""
 export ARCH=arm64
@@ -32,9 +38,9 @@ export CCACHE=ccache
 export CROSS_COMPILE=~/toolchain/bin/aarch64-linux-gnu-
 export CLANG_TRIPLE=~/clang/bin/aarch64-linux-gnu-
 export CC=~/clang/bin/clang
-export CONFIG_LOCALVERSION="Gang Gang for M30s by DAvinash97"
-curl --url "https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}" -F "text=Started Compiling kernel for M30s"
-make m30s_defconfig O=output
+export LOCALVERSION="Gang Gang for M30s by DAvinash97"
+curl https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID} -F text="Started Compiling kernel for M30s"
+make m30s_defconfig O=out
 make -j$(($(nproc) + 1)) O=out
 if [ -f $IMAGE ]; then
     echo "Kernel Compiled";
@@ -42,7 +48,7 @@ if [ -f $IMAGE ]; then
     cd $AIKDIR;
     . ./repackimg.sh;
     if [ -f ${NEWIMG} ]; then
-        cp -r ${NEWIMG} ../ZIP/PRISH/D/M30S/boot.img
+        cp -r ${NEWIMG} ../ZIP/boot.img
         cd ../ZIP
         if [ -f Carrot*.zip ]; then
         rm -f Carrot*.zip;
@@ -50,15 +56,15 @@ if [ -f $IMAGE ]; then
         zip -r9 Carrot-Kernel_M30sdd-$(date +"%Y-%m-%d").zip *
         cp *.zip ${CURDIR}/
         cd $CURDIR;
-        for i in "*.zip"
+        for i in *.zip
         do
-            curl --url "https://api.telegram.org/bot${BOT_TOKEN}/sendDocument?chat_id=${CHAT_ID}" -F "document=@Carrot-Kernel_M30sdd-2021-05-20.zip"
+            curl https://api.telegram.org/bot${BOT_TOKEN}/sendDocument?chat_id=${CHAT_ID} -F document=@${i}
         done
     else
         cd $CURDIR;
         echo "Image-new.img missing"
     fi
 else
-    curl --url "https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}" -F "text=Looks Like an error. Need to check the build log"
+    curl --url https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID} -F text="Looks Like an error. Need to check the build log"
     echo "Error Occured"
 fi
