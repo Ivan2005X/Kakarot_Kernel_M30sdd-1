@@ -36,6 +36,7 @@ endif;
 if is_substring("M307", getprop("ro.boot.bootloader")) then
     ui_print("Target: M30s detected, extracting files...");
     package_extract_file("PRISH/D/M30S/boot.img", "/dev/block/platform/13520000.ufs/by-name/boot");
+    package_extract_file("PRISH/D/M30S/dtbo.img", "/dev/block/platform/13520000.ufs/by-name/dtbo");
 endif;
 if is_substring("M315", getprop("ro.boot.bootloader")) then
     ui_print("Target: M31 detected, extracting files...");

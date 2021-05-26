@@ -66,7 +66,9 @@ echo "======================="
 echo ""
 cp -r ./out/arch/arm64/boot/Image ./PRISH/AIK/split_img/boot.img-zImage
 cp -r ./out/arch/arm64/boot/Image ./PRISH/AK/Image
-. PRISH/AIK/repackimg.sh
+cd PRISH/AIK 
+./repackimg.sh
+cd ../..
 cp -r ./PRISH/AIK/image-new.img ./PRISH/ZIP/PRISH/D/M30S/boot.img
 cp -r ./out/arch/arm64/boot/dtbo.img ./PRISH/ZIP/PRISH/D/M30S/dtbo.img
 cd PRISH/ZIP
@@ -75,6 +77,7 @@ echo "Packing and uploading zip"
 echo "=========================="
 ./zip.sh
 cd ../..
+
 if [ ! True ]; then
 set -o pipefail
 fi

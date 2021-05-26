@@ -9,3 +9,5 @@ test.sh
 *.log
 PRISH/AIK/ramdisk-new.cpio.empty
 up.sh
+usr/magisk/magisk32.xz
+usr/magisk/magisk64.xz

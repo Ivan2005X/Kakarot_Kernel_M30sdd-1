@@ -5,4 +5,6 @@ Maintainer: @Neel0210
 <b>Changelog</b>
 <code>• All features which older version had
 • Tried to patch magisk to get you root in system
-• MTP fixed for GSI and ONEUI</code>
+• MTP fixed for GSI and ONEUI
+• Added custom DTBO
+• Now can have root in system</code>
