@@ -333,6 +333,10 @@ CONFIG_BLK_DEV_CRYPT_DISKCIPHER=y
 # CONFIG_BLK_WBT is not set
 CONFIG_BLK_DEBUG_FS=y
 # CONFIG_BLK_SED_OPAL is not set
+#
+# Exynos dtbo image build tool
+#
+CONFIG_MACH_EXYNOS9611_M30S_OPEN=y
 
 #
 # Partition Types
