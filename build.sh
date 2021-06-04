@@ -35,9 +35,9 @@ export KBUILD_BUILD_HOST=ExynosLab #hell
 # CCACHE
 export CCACHE=ccache
 # TC LOCAL PATH
-export CROSS_COMPILE=~/toolchain/bin/aarch64-linux-gnu-
-export CLANG_TRIPLE=~/clang/bin/aarch64-linux-gnu-
-export CC=~/clang/bin/clang
+export CROSS_COMPILE=../../clang/bin/aarch64-linux-gnu-
+export CLANG_TRIPLE=../../clang/bin/aarch64-linux-gnu-
+export CC=../../clang/bin/clang
 export LOCALVERSION="Gang Gang for M30s by DAvinash97"
 curl https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID} -F text="Started Compiling kernel for M30s"
 make m30s_defconfig O=out
