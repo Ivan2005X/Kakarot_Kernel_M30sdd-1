@@ -50,9 +50,6 @@ if [ -f $IMAGE ]; then
     if [ -f ${NEWIMG} ]; then
         cp -r ${NEWIMG} ../ZIP/boot.img
         cd ../ZIP
-        if [ -f Carrot*.zip ]; then
-        rm -f Carrot*.zip;
-        fi
         zip -r9 Carrot-Kernel_M30sdd-$(date +"%Y-%m-%d").zip *
         cp *.zip ${CURDIR}/
         cd $CURDIR;
